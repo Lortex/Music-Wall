@@ -7,7 +7,7 @@ helpers do
   end
 
   def current_user
-    if cookies[user_id]
+    if cookies[:user_id]
       User.find(cookies[:user_id])
     end
   end
@@ -33,6 +33,11 @@ end
 #login to user
 get '/login' do
   erb :'login'
+end
+
+get '/logout' do
+  cookies.delete :user_id if cookies[:user_id]
+  redirect to '/'
 end
 
 #form to a new account

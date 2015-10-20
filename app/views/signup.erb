@@ -1,7 +1,7 @@
 <link href="signin.css" rel="stylesheet">
 <% if @user && @user.errors.any? %>
     <div>
-        <strong>there appears to be a problem with your user info</strong>
+        <strong>There appears to be a problem with your user info</strong>
         <ul>
             <% @user.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
@@ -10,9 +10,8 @@
     </div>
 <% end %>
 <div class="container">
-    ::before
-    <form class="form-signin" action="/signup">
-        <h2 class="form-signin-heading">create an account!</h2>
+    <form class="form-signin" action="/signup" method="post">
+        <h2 class="form-signin-heading">Create an account!</h2>
         <label> username:</label>
         <input type="text" id="inputusername" class="form-control" name="username" value="<%= @user && @user.username %>">
         <label> email:</label>
@@ -21,5 +20,4 @@
         <input type="text" id="inputpassword" class="form-control" name="password" value-"<% @user && @user.password %>">
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">sign up!</button>
     </form>
-    ::after
 </div>
