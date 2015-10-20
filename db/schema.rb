@@ -21,4 +21,13 @@ ActiveRecord::Schema.define(version: 20151019234502) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.string   "avatar_url"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

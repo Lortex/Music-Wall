@@ -5,7 +5,14 @@ class AddSongs < ActiveRecord::Migration
       t.string :title
       t.string :author
       t.string :url
+      t.timestamps null: false
+    end
 
+    create_table :users do |t|
+      t.string :username
+      t.string :avatar_url
+      t.string :email
+      t.string :password
       t.timestamps null: false
     end
   end
