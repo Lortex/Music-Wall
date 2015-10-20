@@ -43,6 +43,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/songs">Wall of Songs</a></li>
                     <li><a href="/songs/new">Add Song</a></li>
+                    <li class="dropdown"></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <% if !cookies[:user_id] %>
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Signup</a></li>
@@ -51,7 +54,6 @@
                         <li><a href="/logout">Logout</a></li>
                         <li><a href="/songs">Profile</a></li>
                     <% end %>
-                    <li class="dropdown"></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
