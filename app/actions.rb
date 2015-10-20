@@ -1,4 +1,20 @@
 # Homepage (Root path)
+helpers do
+
+  #checks if any users are logged in
+  def logged_in?
+    !!current_user
+  end
+
+  def current_user
+    if cookies[user_id]
+      User.find(cookies[:user_id])
+    end
+  end
+end
+
+
+
 get '/' do
   erb :index
 end
@@ -22,6 +38,21 @@ end
 #form to a new account
 get '/signup' do
   erb :'signup'
+end
+
+#searches for the user with info given
+post '/login' do
+  @user = User.find_by(username: params[:username_or_email], password: params[:password] )
+  if @user.nil?
+    @user = User.find_by(email: params[:username_or_email], password: params[:password])
+  end
+  if @user
+    cookies[:user_id] = @user.id
+    redirect to('/')
+  else
+    @error_messages = ['Invalid user info']
+    erb :'login'
+  end
 end
 
 #create a new account
