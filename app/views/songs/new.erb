@@ -1,8 +1,8 @@
-<% if @message && message.errors.any? %>
+<% if @song && @song.errors.any? %>
     <div>
-        <strong>Invalid song values</strong>
+        <strong>There appears to be a problem with your song info</strong>
         <ul>
-            <% @message.errors.full_messages.each do |message| %>
+            <% @song.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -11,15 +11,15 @@
 <form method="post" action="/songs">
     <div>
         <label> Author:</label>
-        <input type="text" name="author">
+        <input type="text" name="author" value="<%= @song && @song.author %>">
     </div>
     <div>
         <label>Title:</label>
-        <input type="text" name="title">
+        <input type="text" name="title" value="<%= @song && @song.title %>">
     </div>
     <div>
         <label>URL(optional):</label>
-        <input type="text" name="URL">
+        <input type="text" name="url" value="<%= @song && @song.url %>">
     </div>
     <div>
         <input type="submit" value="Submit">
