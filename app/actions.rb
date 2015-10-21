@@ -8,7 +8,7 @@ helpers do
 
   def current_user
     if cookies[:user_id]
-      User.find(cookies[:user_id])
+      @current_user = User.find(cookies[:user_id])
     end
   end
 end
@@ -68,6 +68,7 @@ post '/signup' do
     password: params[:password]
   )
   if @user.save
+    cookies[:user_id] = @user.id
     redirect '/songs'
   else
     erb :'signup'
@@ -75,16 +76,31 @@ post '/signup' do
 end
 
 #create a new song
+#if else statement allows anonymous OR user-made additions
 post '/songs' do
-  @song = Song.new(
-    title: params[:title],
-    author: params[:author],
-    url: params[:url]
-  )
-  if @song.save
-    redirect '/songs'
+  #make the song as a user if logged in
+  if logged_in?
+    @song = @current_user.songs.new(
+      title: params[:title],
+      author: params[:author],
+      url: params[:url]
+    )
+    if @song.save
+      redirect '/songs'
+    else
+      erb :'songs/new'
+    end
+    #otherwise, make the song anonymously
   else
-    erb :'songs/new'
+    @song = @current_user.songs.new(
+      title: params[:title],
+      author: params[:author],
+      url: params[:url]
+    )
+    if @song.save
+      redirect '/songs'
+    else
+      erb :'songs/new'
+    end
   end
 end
-    

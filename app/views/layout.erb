@@ -49,6 +49,7 @@
                     <% if !cookies[:user_id] %>
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Signup</a></li>
+                        <li><a>You are signed in</a></li>
                     <% end %>
                     <% if cookies[:user_id] %>
                         <li><a href="/logout">Logout</a></li>

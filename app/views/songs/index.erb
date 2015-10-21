@@ -1,8 +1,9 @@
 <% @songs.each do |song| %>
-      <div class="song">
-          <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
-          <p>
-                <%= song.url %>
-                    </p>
-                      </div>
-                      <% end %>
+    <div class="song">
+        <h3><%= song.title %> <small>(by: <%= song.author %>)</small></h3>
+        <p><%= song.url %></p>
+        <% if song.user_id %>
+            <p>Posted by: <%= User.find(user_id = song.user_id).username %></p>
+        <% end %>
+    </div>
+<% end %>
